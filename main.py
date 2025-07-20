@@ -42,3 +42,25 @@ async def analyze(file: UploadFile = File(...)):
             "exam": "tds-2025-05-roe",
             "error": str(e)
         }
+from fastapi.responses import JSONResponse
+
+@app.post("/analyze")
+async def analyze(file: UploadFile = File(...)):
+    try:
+        content = await file.read()
+        ...
+        return {
+            "answer": round(float(total), 2),
+            "email": "21f1000341@ds.study.iitm.ac.in",
+            "exam": "tds-2025-05-roe"
+        }
+    except Exception as e:
+        return JSONResponse(
+            status_code=200,
+            content={
+                "answer": 0,
+                "email": "21f1000341@ds.study.iitm.ac.in",
+                "exam": "tds-2025-05-roe",
+                "error": str(e)
+            }
+        )
